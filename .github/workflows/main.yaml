@@ -38,5 +38,5 @@ jobs:
       uses: devops-infra/action-commit-push@v0.3
       with:
         github_token: ${{ secrets.TOKEN }}
-        commit_message: Version updated
+        commit_message: Version updated!
         
