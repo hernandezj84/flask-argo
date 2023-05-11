@@ -23,7 +23,7 @@ jobs:
       run: |
         # Build docker container
         git_hash=$(git rev-parse --short "$GITHUB_SHA")
-        docker build -t ${DOCKER_USERNAME}/flask-argocd:${GITHUB_REF##*/}-$git_hash .
+        docker build -t ${DOCKER_USERNAME}/flask-argocd:${GITHUB_REF##*/}-$git_hash -f docker/Dockerfile .
         echo "Pushing image..."
         docker push ${DOCKER_USERNAME}/flask-argocd:${GITHUB_REF##*/}-$git_hash
       env:
