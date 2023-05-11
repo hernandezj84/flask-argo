@@ -29,13 +29,14 @@ jobs:
       env:
         DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
 
-    - name: Update Image Version in the related HelmChart values.yaml
-      uses: fjogeleit/yaml-update-action@main
+    - name: Update Version
+      run: |
+          git_hash=$(git rev-parse --short "$GITHUB_SHA")
+          sed -i "s/\(^  tag:\).*/\1${GITHUB_REF##*/}-$git_hash/" k8s/helm/values.yaml
+          
+    - name: Commit and push changes
+      uses: devops-infra/action-commit-push@v0.3
       with:
-        valueFile: 'k8s/helm/values.yaml'
-        propertyPath: 'tag'
-        value: ${GITHUB_REF##*/}-$git_hash
-        commitChange: true
-        message: 'Update Image Version to ${GITHUB_REF##*/}-$git_hash'
-        github_token: ${{secrets.token}}
+        github_token: ${{ secrets.TOKEN }}
+        commit_message: Version updated
         
