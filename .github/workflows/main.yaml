@@ -35,5 +35,5 @@ jobs:
         valueFile: 'k8s/helm/values.yaml'
         propertyPath: 'tag'
         value: ${GITHUB_REF##*/}-$git_hash
-        branch: master
+        commitChange: true
         message: 'Update Image Version to ${GITHUB_REF##*/}-$git_hash' 
