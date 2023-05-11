@@ -36,4 +36,6 @@ jobs:
         propertyPath: 'tag'
         value: ${GITHUB_REF##*/}-$git_hash
         commitChange: true
-        message: 'Update Image Version to ${GITHUB_REF##*/}-$git_hash' 
+        message: 'Update Image Version to ${GITHUB_REF##*/}-$git_hash'
+        github_token: ${{secrets.token}}
+        
