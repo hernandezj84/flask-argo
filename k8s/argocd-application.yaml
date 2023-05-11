@@ -8,9 +8,9 @@ spec:
     namespace: flask-argocd
     server: 'https://kubernetes.default.svc'
   source:
-    path: k8s/
-    repoURL: 'https://@github.com:Crypto-TII/flask-argocd.git'
-    targetRevision: HEAD
+    path: k8s/helm
+    repoURL: 'https://github.com/hernandezj84/flask-argo.git'
+    targetRevision: master
     directory:
        recurse: true
   project: default
