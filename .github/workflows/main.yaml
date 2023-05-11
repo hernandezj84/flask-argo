@@ -18,7 +18,7 @@ jobs:
         username: ${{secrets.DOCKER_USERNAME}}
         password: ${{secrets.DOCKER_PASSWORD}}
 
-    - name: Build, tag, and push image to Amazon ECR
+    - name: Build, tag, and push image to dockerhub
       id: build-image
       run: |
         # Build docker container
@@ -29,12 +29,11 @@ jobs:
       env:
         DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
 
-    - name: Update Image Version in the yaml
+    - name: Update Image Version in the related HelmChart values.yaml
       uses: fjogeleit/yaml-update-action@main
       with:
         valueFile: 'k8s/helm/values.yaml'
-        propertyPath: 'image.tag'
+        propertyPath: 'tag'
         value: ${GITHUB_REF##*/}-$git_hash
-        masterBranchName: 'master'
-        branch: 'master'
-        message: 'Update image version from github-actions'
+        branch: master
+        message: 'Update Image Version to ${GITHUB_REF##*/}-$git_hash' 
