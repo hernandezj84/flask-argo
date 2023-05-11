@@ -1,1 +1,1 @@
-# flask-argo
+# flask-argocd
