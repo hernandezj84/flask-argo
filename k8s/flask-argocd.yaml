@@ -1,0 +1,34 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-argocd
+spec:
+  selector:
+    app.kubernetes.io/name: flask-argocd
+  ports:
+  - port: 5000
+    targetPort: 5000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-argocd
+  labels:
+    app: flask-argocd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-argocd
+  template:
+    metadata:
+      labels:
+        app: flask-argocd
+    spec:
+      containers:
+      - name: flask-argocd
+        image: devopscrc/flask-argocd:latest
+        ports:
+        - containerPort: 5000
+---
